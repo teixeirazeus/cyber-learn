@@ -14,6 +14,7 @@ def normalizador(entrada):
 class LinearRegression:
     self.minNmax_x = []
     self.minNmax_y = []
+    self.theta = []
     def fit(self, x, y):
         for atribute in range(len(x[0])):
             # get min and max
@@ -27,3 +28,24 @@ class LinearRegression:
                 v[atribute] = (v[atribute]-min_x)/(max_x-min_x)
 
             minNmax_x.append([min_x, max_x])  # save for predict
+
+    def cost(self, x, y, theta):
+        m = y.shape[0] # number of samples
+        h = x.dot(theta) - y;
+        return (1/(2*m)) * np.sum(h**2)
+
+    def train(self, x, y, alpha, iterations):
+        # alpha is the learning rate
+        if len(self.theta) == 0: self.theta = np.array([0 for atribute in x]).T
+        m = y.shape[0]  # number of samples
+        history = []
+        for i in range(iterations):
+            # e = sum(((X * theta) - y). * X);
+            e = np.sum((x.dot(theta)-y).multiply(x))
+            #theta = theta - (e * (alpha / m))
+            self.theta = self.theta - (e*(alpha/m))
+            history.append(self.theta)
+        return self.theta, history
+
+
+
