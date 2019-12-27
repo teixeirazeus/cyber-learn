@@ -27,7 +27,20 @@ class LinearRegression:
             for v in range(len(x)):
                 v[atribute] = (v[atribute]-min_x)/(max_x-min_x)
 
-            minNmax_x.append([min_x, max_x])  # save for predict
+            self.minNmax_x.append([min_x, max_x])  # save for predict
+
+        for atribute in range(len(y[0])):
+            # get min and max
+            min_y, max_y = 0,0
+            for vector in y:
+                if vector[atribute] < min_y: min_y = vector[atribute]
+                if vector[atribute] > max_y: max_y = vector[atribute]
+
+            # mean normalization
+            for v in range(len(y)):
+                v[atribute] = (v[atribute]-min_y)/(max_x-min_y)
+
+            self.minNmax_y.append([min_x, max_x])  # save for predict
 
     def cost(self, x, y, theta):
         m = y.shape[0] # number of samples
@@ -46,6 +59,7 @@ class LinearRegression:
             self.theta = self.theta - (e*(alpha/m))
             history.append(self.theta)
         return self.theta, history
+
 
 
 
