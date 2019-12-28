@@ -1,4 +1,4 @@
-import greymind as gm
+import cyberlearn as cyberl
 import random
 import numpy as np
 
