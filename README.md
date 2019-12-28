@@ -1,2 +1,4 @@
 # greymind
-Machine Learning Library
+Machine Learning Library <br>
+Algorithms
+- Linear regression
