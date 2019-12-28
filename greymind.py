@@ -32,16 +32,21 @@ class LinearRegression:
 
     def train(self, x, y, alpha, iterations):
         # alpha is the learning rate
-        if len(self.theta) == 0: self.theta = np.array([0 for atribute in x]).T
+        if len(self.theta) == 0: self.theta = np.array([0.0 for atribute in x[0]]).T
         m = y.shape[0]  # number of samples
         history = []
         for i in range(iterations):
             # e = sum(((X * theta) - y). * X);
-            e = np.sum((x.dot(theta)-y).multiply(x))
+            #e = np.sum((x.dot(self.theta)-y).multiply(x))
+            e = np.sum(x.T*(x.dot(self.theta) -y))
+            print("Erro:", e)
             #theta = theta - (e * (alpha / m))
             self.theta = self.theta - (e*(alpha/m))
             history.append(self.theta)
         return self.theta, history
+
+    def predict(self, x):
+        return x.dot(self.theta)
 
 
 
