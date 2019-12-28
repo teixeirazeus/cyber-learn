@@ -1,24 +1,30 @@
 import numpy as np
 
+def apply_norm(data, maxNmin):
+    """Aplica normalizaçao dado um vetor de minimos e maximos"""
+    for atribute, mm in enumerate(maxNmin):
+        min, max = mm
+        for i in range(len(data)):
+            data[i][atribute] = (data[i][atribute] - min) / (max - min)
 
-def norm(entrada):
+
+def norm(data):
     """Normaliza uma lista de vetores."""
     maxNmin = []
-    for campo in range(len(dados[0])):
+    for atribute in range(len(data[0])):
         # get min and max
-        min, max = 0,0
-        for vector in dados:
+        min, max = np.inf, -np.inf
+        for vector in data:
             if vector[atribute] < min: min = vector[atribute]
             if vector[atribute] > max: max = vector[atribute]
-        # update
-        for i in range(len(dados)):
-            dados[i][campo] = (dados[i][campo]-min)/(max-min)
         maxNmin.append([min,max])
+        # update
+    apply_norm(data, maxNmin)
     return maxNmin
 
 class LinearRegression:
-    self.theta = []
-
+    def __init__(self):
+        self.theta = []
     def cost(self, x, y, theta):
         m = y.shape[0] # number of samples
         h = x.dot(theta) - y;
