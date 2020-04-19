@@ -12,7 +12,7 @@ y = [[float(v[-1])]for v in data]
 x = np.array(x)
 y = np.array(y).flatten()
 
-lr = gm.LinearRegression()
+lr = cyberl.LinearRegression()
 lr.train(x, y, 0.001, 1000)
 p = lr.predict(np.array([[9,9],[10,10]]))
 print("Preveu", p)
